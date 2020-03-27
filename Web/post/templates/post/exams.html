@@ -6,7 +6,7 @@
 {% if latest_list %}
     <ul>
     {% for exam in latest_list %}
-        <li><a href="/post/{{exam.id}}/">{{ exam.name }}</a></li>
+        <li><a href="/post/exams/{{exam.id}}/">{{ exam.name }}</a></li>
     {% endfor %}
     </ul>
 {% else %}

@@ -13,7 +13,6 @@ y = [x[0] for x in os.walk(directory) if x[0] != directory]
 for x in y:
 	slide_id, name, teacher = x[len(directory) + 1: len(x)].split('-')
 	value = (slide_id, name, teacher, x)
-	# print(value)
 	mycursor.execute('SELECT * FROM post_slides')
 	row = mycursor.fetchall()
 	source_check = [i[4] for i in row]

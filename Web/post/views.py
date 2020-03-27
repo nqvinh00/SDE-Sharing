@@ -1,6 +1,6 @@
 from __future__ import unicode_literals
 from django.http import HttpResponse, Http404, FileResponse
-from .models import Exams, Documents
+from .models import Exams, Documents, Slides
 from django.shortcuts import render
 
 def base(request):
@@ -17,3 +17,8 @@ def exam_detail(request, id):
 	except Exams.DoesNotExist:
 		raise Http404("Exam does not exist")
 	return render(request, 'post/exam_detail.html', {'exam': exam})
+
+def slides_list(request):
+	latest_list = Slides.objects.all()
+	context = {'latest_list':latest_list}
+	return render(request, 'post/slides.html', context)
