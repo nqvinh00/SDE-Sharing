@@ -8,8 +8,7 @@ db = mysql.connector.connect(
 	database = "web"
 	)
 mycursor = db.cursor(buffered=True)
-directory = "D:\\Python\\Project1\\Source\\Documents"
-f = []
+directory = "D:/Python/Project1/Source/Documents"
 for (path, dirnames, filenames) in os.walk(directory):
 	for i in filenames:
 		source = path + "\\" + i
