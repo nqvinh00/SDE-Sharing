@@ -35,5 +35,16 @@ def slide_detail(request, id):
 			list_.append(path + "/" + i)
 			list_.append(i[0:len(i) - 4])
 			details.append(tuple(list_))
-
 	return render(request, 'post/slide_detail.html', {'slides':details})
+
+def documents_list(request):
+	latest_list = Documents.objects.all()
+	context = {'latest_list' : latest_list}
+	return render(request, 'post/documents.html', context)
+
+def document_detail(request, id):
+	try:
+		doc = Documents.objects.get(id = id)
+	except Documents.DoesNotExist:
+		raise Http404("Exam does not exist")
+	return render(request, 'post/document_detail.html', {'document': doc})

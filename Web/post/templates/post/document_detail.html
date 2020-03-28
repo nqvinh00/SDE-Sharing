@@ -1,0 +1,12 @@
+{% extends "post/base.html"%}
+
+{%block title %} {{document.name}} {% endblock %}
+
+{% block content %}
+{% if document %}
+	<li>{{document.name}}</li>
+	<li>{{document.source}}</li>
+	{% load static 	%}
+	<!-- <embed src="{% static ''%}{{exam.source}}" width="500" height="525" /> -->
+{% endif%}
+{% endblock %}
