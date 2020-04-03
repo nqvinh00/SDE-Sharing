@@ -40,6 +40,7 @@
                     <th>Tên môn</th>
                     <th>Giảng viên</th>
                     <th>Source</th>
+                    <th>Download</th>
                 </tr>
             </thead>
             <tbody>
@@ -51,6 +52,7 @@
                     <td>{{ exam.name }}</td>
                     <td>{{ exam.teacher }}</td>
                     <td><a href="/exams/{{exam.id}}/">Link</td>
+                    <td>Thêm sau</td>
                 </tr>
                 {% endfor %}
                 {% endif %}

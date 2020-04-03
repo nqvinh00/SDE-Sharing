@@ -40,6 +40,7 @@ Slides
                     <th>Tên môn</th>
                     <th>Giảng viên</th>
                     <th>Source</th>
+                    <th>Download</th>
                 </tr>
             </thead>
             <tbody>
@@ -51,6 +52,7 @@ Slides
                     <td>{{ slide.name }}</td>
                     <td>{{ slide.teacher }}</td>
                     <td><a href="/slides/{{slide.id}}/">Link</td>
+                    <td>Thêm sau</td>
                 </tr>
                 {% endfor %}
                 {% endif %}
