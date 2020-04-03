@@ -34,7 +34,6 @@ INSTALLED_APPS = [
     'widget_tweaks',
     'django_filters',
     'post',
-    'background_task',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
