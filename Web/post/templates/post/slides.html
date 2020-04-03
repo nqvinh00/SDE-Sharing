@@ -1,15 +1,61 @@
-{% extends "post/base.html"%}
-
-{%block title %} Slides {% endblock %}
-
-{% block content %}
-{% if latest_list %}
-    <ul>
-    {% for slide in latest_list %}
-        <li><a href="/post/slides/{{slide.id}}/">{{ slide.slide_id }} - {{ slide.name }} - {{ slide.teacher }}</a></li>
-    {% endfor %}
-    </ul>
-{% else %}
-    <p>No post are available.</p>
-{% endif %}
-{% endblock %}
+{% extends "post/base.html" %}
+{% block title %}
+Slides
+{% endblock title %}
+{% block main %}
+<div class="row">
+    <div class="col-md-3">
+        <h4 class="d-flex justify-content-between align-items-center mb-3">
+            <span class="text-muted">Lọc tìm kiếm</span>
+        </h4>
+        {% load widget_tweaks %}
+        <form method="get" class="border p-3">
+            <div class="mb-3">
+                <label for="">Tên môn</label>
+                {% render_field form.name class="form-control" %}
+            </div>
+            <div class="mb-3">
+                <label for="">Mã môn</label>
+                {% render_field form.slide_id class="form-control" %}
+            </div>
+            <div class="mb-3">
+                <label for="">Giảng viên</label>
+                {% render_field form.teacher class="form-control" %}
+            </div>
+            <hr class="mb-4">
+            <button class="btn btn-primary btn-lg btn-block" type="submit">Tìm kiếm</button>
+        </form>
+    </div>
+    <div class="col-md-8">
+        <h2>Slides</h2>
+        <h4 class="d-flex justify-content-between align-items-center mb-3">
+            <span class="text-muted">Danh sách Slides</span>
+            <span class="badge badge-secondary badge-pill">{{ slides.count }}</span>
+        </h4>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>STT</th>
+                    <th>Mã môn</th>
+                    <th>Tên môn</th>
+                    <th>Giảng viên</th>
+                    <th>Source</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% if slides %}
+                {% for slide in slides %}
+                <tr>
+                    <td>{{ forloop.counter }}</td>
+                    <td>{{ slide.slide_id }}</td>
+                    <td>{{ slide.name }}</td>
+                    <td>{{ slide.teacher }}</td>
+                    <td><a href="/slides/{{slide.id}}/">Link</td>
+                </tr>
+                {% endfor %}
+                {% endif %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock main %}

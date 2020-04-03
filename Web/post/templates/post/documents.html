@@ -1,15 +1,49 @@
-{% extends "post/base.html"%}
-
-{%block title %} List documents {% endblock %}
-
-{% block content %}
-{% if latest_list %}
-    <ul>
-    {% for document in latest_list %}
-        <li><a href="/post/documents/{{document.id}}/">{{ document.name }}</a></li>
-    {% endfor %}
-    </ul>
-{% else %}
-    <p>No post are available.</p>
-{% endif %}
-{% endblock %}
+{% extends "post/base.html" %}
+{% block title %}
+Tài liệu, sách
+{% endblock title %}
+{% block main %}
+<div class="row">
+    <div class="col-md-3">
+        <h4 class="d-flex justify-content-between align-items-center mb-3">
+            <span class="text-muted">Lọc tìm kiếm</span>
+        </h4>
+        {% load widget_tweaks %}
+        <form method="get" class="border p-3">
+            <div class="mb-3">
+                <label for="">Tên sách</label>
+                {% render_field form.name class="form-control" %}
+            </div>
+            <hr class="mb-4">
+            <button class="btn btn-primary btn-lg btn-block" type="submit">Tìm kiếm</button>
+        </form>
+    </div>
+    <div class="col-md-8">
+        <h2>Đề thi</h2>
+        <h4 class="d-flex justify-content-between align-items-center mb-3">
+            <span class="text-muted">Danh sách sách</span>
+            <span class="badge badge-secondary badge-pill">{{ documents.count }}</span>
+        </h4>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>STT</th>
+                    <th>Tên sách</th>
+                    <th>Source</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% if documents %}
+                {% for document in documents %}
+                <tr>
+                    <td>{{ forloop.counter }}</td>
+                    <td>{{ document.name }}</td>
+                    <td><a href="/documents/{{document.id}}/">Link</td>
+                </tr>
+                {% endfor %}
+                {% endif %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock main %}

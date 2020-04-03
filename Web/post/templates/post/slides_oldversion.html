@@ -1,0 +1,15 @@
+{% extends "post/base.html"%}
+
+{%block title %} Slides {% endblock %}
+
+{% block content %}
+{% if latest_list %}
+    <ul>
+    {% for slide in latest_list %}
+        <li><a href="/post/slides/{{slide.id}}/">{{ slide.slide_id }} - {{ slide.name }} - {{ slide.teacher }}</a></li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No post are available.</p>
+{% endif %}
+{% endblock %}

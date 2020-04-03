@@ -2,11 +2,11 @@
 
 {%block title %} Slide {% endblock %}
 
-{% block content %}
+{% block main %}
 {% if slides %}
 	{% for slide in slides %}
 		<li>{{ slide.0 }}</li>
 		<li>{{ slide.1 }}</li>
 	{% endfor %}
 {% endif%}
-{% endblock %}
+{% endblock main %}
