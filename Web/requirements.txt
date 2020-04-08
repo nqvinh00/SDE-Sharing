@@ -8,7 +8,7 @@ attrs==19.2.0
 backcall==0.1.0
 beautifulsoup4==4.8.0
 billiard==3.3.0.23
-bleach==3.1.0
+bleach==3.1.4
 bottle==0.12.17
 bs4==0.0.1
 cachetools==3.1.1
