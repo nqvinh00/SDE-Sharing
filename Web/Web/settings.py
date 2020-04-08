@@ -31,6 +31,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'gunicorn',
     'widget_tweaks',
     'django_filters',
     'post',
