@@ -1,3 +1,5 @@
 django
+gunicorn
 django_filters
 django_widget_tweaks
+django_heroku
