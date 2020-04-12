@@ -1,8 +1,9 @@
 from __future__ import unicode_literals
 from django.http import HttpResponse, Http404, FileResponse
 from .models import Exams, Documents, Slides
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from .filters import SlidesFilter, ExamsFilter, DocumentsFilter
+from .forms import DocumentForm, ExamForm
 import os
 
 def base(request):
@@ -46,6 +47,15 @@ def slide_detail(request, id):
 			details.append(tuple(list_))
 	return render(request, 'post/slide_detail.html', {'slides':details})
 
+def exam_upload(request):
+	if request.method == 'POST':
+		form = ExamForm(request.POST, request.FILES)
+		if form.is_valid():
+			form.save()
+			return redirect('home')
+	else:
+		form = ExamForm()
+	return render(request, 'post/upload_exam.html', {'form': form})
 
 
 def documents(request):
@@ -63,6 +73,16 @@ def document_detail(request, id):
 	except Documents.DoesNotExist:
 		raise Http404("Exam does not exist")
 	return render(request, 'post/document_detail.html', {'document': doc})
+
+def document_upload(request):
+	if request.method == 'POST':
+		form = DocumentForm(request.POST, request.FILES)
+		if form.is_valid():
+			form.save()
+			return redirect('home')
+	else:
+		form = DocumentForm()
+	return render(request, 'post/upload_document.html', {'form': form})
 
 # def exams_list(request): #old version
 # 	latest_list = Exams.objects.all()
