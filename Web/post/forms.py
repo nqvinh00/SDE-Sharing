@@ -6,7 +6,7 @@ class DocumentForm(forms.ModelForm):
 		model = UploadDocuments
 		fields = ('name', 'document', )
 		labels = {'name': 'Tên sách, tài liệu', 'document':'File'}
-		help_texts = {'name':'Vui lòng điền đầy đủ tên sách', 'document':'Tải lên file của bạn'}
+		help_texts = {'name':'Vui lòng điền đầy đủ tên sách',}
 
 class ExamForm(forms.ModelForm):
 	class Meta:

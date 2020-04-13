@@ -1,9 +1,11 @@
 from __future__ import unicode_literals
 from django.http import HttpResponse, Http404, FileResponse
-from .models import Exams, Documents, Slides
+from .models import Exams, Documents, Slides, UploadDocuments, UploadExams
 from django.shortcuts import render, redirect
 from .filters import SlidesFilter, ExamsFilter, DocumentsFilter
 from .forms import DocumentForm, ExamForm
+from .documents import updateDocuments
+from .exams import updateExams
 import os
 
 def base(request):
@@ -24,6 +26,27 @@ def exam_detail(request, id):
 	except Exams.DoesNotExist:
 		raise Http404("Exam does not exist")
 	return render(request, 'post/exam_detail.html', {'exam': exam})
+
+def exam_upload(request):
+	if request.method == 'POST':
+		form = ExamForm(request.POST, request.FILES)
+		if form.is_valid():
+			form.save()
+			exam_auto_update()
+			updateExams()
+			return redirect('home')
+	else:
+		form = ExamForm()
+	return render(request, 'post/upload_exam.html', {'form': form})
+
+def exam_auto_update():
+	query = [UploadExams.objects.all()]
+	lastest = query[0][len(query[0]) - 1]
+	print(lastest.name)
+	filepath = str(lastest.exam)
+	path = r"D:/Python/Project1/Source/" + filepath
+	path_ = r"D:/Python/Project1/Source/Examination/" + lastest.name + ' - ' + lastest.teacher + '.' + filepath[-3:len(filepath)]
+	os.rename(path, path_)
 
 def slides(request):
 	query = Slides.objects.all()
@@ -47,17 +70,6 @@ def slide_detail(request, id):
 			details.append(tuple(list_))
 	return render(request, 'post/slide_detail.html', {'slides':details})
 
-def exam_upload(request):
-	if request.method == 'POST':
-		form = ExamForm(request.POST, request.FILES)
-		if form.is_valid():
-			form.save()
-			return redirect('home')
-	else:
-		form = ExamForm()
-	return render(request, 'post/upload_exam.html', {'form': form})
-
-
 def documents(request):
 	query = Documents.objects.all()
 	exams_filter = DocumentsFilter(request.GET, queryset=query)
@@ -79,10 +91,22 @@ def document_upload(request):
 		form = DocumentForm(request.POST, request.FILES)
 		if form.is_valid():
 			form.save()
+			document_auto_update()
+			updateDocuments()
 			return redirect('home')
 	else:
 		form = DocumentForm()
 	return render(request, 'post/upload_document.html', {'form': form})
+
+def document_auto_update():
+	query = [UploadDocuments.objects.all()]
+	lastest = query[0][len(query[0]) - 1]
+	filepath = str(lastest.document)
+	path = r"D:/Python/Project1/Source/" + filepath
+	path_ = r"D:/Python/Project1/Source/Documents/" + lastest.name + '.' + filepath[-3:len(filepath)]
+	os.rename(path, path_)
+
+
 
 # def exams_list(request): #old version
 # 	latest_list = Exams.objects.all()
