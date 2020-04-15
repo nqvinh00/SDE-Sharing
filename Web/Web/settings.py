@@ -124,13 +124,10 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
-# STATIC_ROOT = 'D:/Python/Project1/Source/'
-# import dj_database_url
-# db_from_env = dj_database_url.config(conn_max_age=500)
-# DATABASES['default'].update(db_from_env)
+STATIC_ROOT = '/'
 MEDIA_ROOT = 'D:/Python/Project1/Source/'
 MEDIA_URL = '/Source/'
-STATIC_URL = '/static/'
+STATIC_URL = '/'
 STATICFILES_DIR = [os.path.join(BASE_DIR, "static"),]
 STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
 # STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'

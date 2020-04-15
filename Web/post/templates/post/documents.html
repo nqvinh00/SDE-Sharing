@@ -40,7 +40,7 @@ Tài liệu, sách
                     <td>{{ forloop.counter }}</td>
                     <td>{{ document.name }}</td>
                     <td><a href="/documents/{{document.id}}/">Link</td>
-                    <td>Thêm sau</td>
+                    <td><a href="/documents/download/{{document.id}}" download class="btn btn-primary flex-last" type="submit"><i class="fas fa-download"></i>Downlaod</a>
                 </tr>
                 {% endfor %}
                 {% endif %}

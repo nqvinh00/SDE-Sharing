@@ -1,5 +1,5 @@
 from django import forms
-from .models import UploadDocuments, UploadExams
+from .models import UploadDocuments, UploadExams, UploadSlides
 
 class DocumentForm(forms.ModelForm):
 	class Meta:
@@ -16,11 +16,11 @@ class ExamForm(forms.ModelForm):
 		help_texts = {'name':'Vui lòng điền đầy đủ thông tin', 'exam':'Tải lên file của bạn', 
 					'exam_id':'Vui lòng điền đầy đủ thông tin', 'teacher':'Vui lòng điền đầy đủ thông tin'}
 
-# class SlidesForm(forms.ModelForm):
-# 	class Meta:
-# 		model = UploadSlides
-# 		fields = ('name', 'slide_id', 'teacher', 'slides')
-# 		labels = {'name': 'Tên môn', 'slides':'Files', 'teacher':'Tên giảng viên', 'slide_id':'Mã môn'}
-# 		help_texts = {'name':'Vui lòng điền đầy đủ thông tin', 'slides':'Tải lên các file của bạn', 
-# 					'teacher':'Vui lòng điền đầy đủ thông tin', 'slide_id':'Vui lòng điền đầy đủ thông tin'}
-#		widgets = {'slides': (attrs={'multiple':True}), }
+class SlidesForm(forms.ModelForm):
+	class Meta:
+		model = UploadSlides
+		fields = ('name', 'slide_id', 'teacher', 'slides')
+		labels = {'name': 'Tên môn', 'slides':'Files', 'teacher':'Tên giảng viên', 'slide_id':'Mã môn'}
+		help_texts = {'name':'Vui lòng điền đầy đủ thông tin', 'slides':'Tải lên các file của bạn', 
+					'teacher':'Vui lòng điền đầy đủ thông tin', 'slide_id':'Vui lòng điền đầy đủ thông tin'}
+		widgets = {'slides': forms.FileInput(attrs={'multiple':True})}

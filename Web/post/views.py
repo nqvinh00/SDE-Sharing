@@ -1,12 +1,12 @@
 from __future__ import unicode_literals
 from django.http import HttpResponse, Http404, FileResponse
-from .models import Exams, Documents, Slides, UploadDocuments, UploadExams
+from .models import Exams, Documents, Slides, UploadDocuments, UploadExams, UploadSlides
 from django.shortcuts import render, redirect
 from .filters import SlidesFilter, ExamsFilter, DocumentsFilter
-from .forms import DocumentForm, ExamForm
+from .forms import DocumentForm, ExamForm, SlidesForm
 from .documents import updateDocuments
 from .exams import updateExams
-import os
+import os, mimetypes
 
 def base(request):
 	return render(request, 'post/base.html')
@@ -45,8 +45,19 @@ def exam_auto_update():
 	print(lastest.name)
 	filepath = str(lastest.exam)
 	path = r"D:/Python/Project1/Source/" + filepath
-	path_ = r"D:/Python/Project1/Source/Examination/" + lastest.name + ' - ' + lastest.teacher + '.' + filepath[-3:len(filepath)]
+	path_ = r"D:/Python/Project1/Source/Examination/" + lastest.exam_id + ' - ' + lastest.name + ' - ' + lastest.teacher + '.' + filepath[-3:len(filepath)]
 	os.rename(path, path_)
+
+def exam_download(request, id):
+	try:
+		exam = Exams.objects.get(id=id)
+		file = open(exam.source, 'rb')
+		mimetype, i = mimetypes.guess_type(exam.source)
+		response = HttpResponse(file, content_type=mimetype)
+		response['Content-Disposition'] = "attachment; filename = %s" % exam.source
+		return response
+	except Exams.DoesNotExist:
+		raise Http404("File does not exist")
 
 def slides(request):
 	query = Slides.objects.all()
@@ -69,6 +80,20 @@ def slide_detail(request, id):
 			list_.append(i[0:len(i) - 4])
 			details.append(tuple(list_))
 	return render(request, 'post/slide_detail.html', {'slides':details})
+
+def slide_upload(request):
+	if request.method == 'POST':
+		form = SlidesForm(request.POST, request.FILES)
+		files = request.FILES.getlist('slides')
+		if form.is_valid():
+			for file in files:
+				
+			return redirect('home')
+	else:
+		form = SlidesForm()
+	return render(request, 'post/upload_slide.html', {'form': form})
+
+
 
 def documents(request):
 	query = Documents.objects.all()
@@ -106,7 +131,16 @@ def document_auto_update():
 	path_ = r"D:/Python/Project1/Source/Documents/" + lastest.name + '.' + filepath[-3:len(filepath)]
 	os.rename(path, path_)
 
-
+def document_download(request, id):
+	try:
+		document = Documents.objects.get(id=id)
+		file = open(document.source, 'rb')
+		mimetype, i = mimetypes.guess_type(document.source)
+		response = HttpResponse(file, content_type=mimetype)
+		response['Content-Disposition'] = "attachment; filename = %s" % document.source
+		return response
+	except Documents.DoesNotExist:
+		raise Http404("File does not exist")
 
 # def exams_list(request): #old version
 # 	latest_list = Exams.objects.all()

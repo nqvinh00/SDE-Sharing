@@ -38,21 +38,21 @@ class Slides(models.Model):
 		default_related_name = 'slides'
 
 class UploadDocuments(models.Model):
-	document = models.FileField(upload_to='Documents/')
+	document = models.FileField(upload_to='Documents/', unique=True)
 	date = models.DateTimeField(auto_now_add=True)
-	name = models.CharField(max_length = 200, unique=True, default="")
+	name = models.CharField(max_length = 200, default="")
 	description = models.CharField(max_length=255, blank=True)
 
 class UploadExams(models.Model):
-	exam = models.FileField(upload_to='Examination/')
+	exam = models.FileField(upload_to='Examination/', unique=True)
 	date = models.DateTimeField(auto_now_add=True)
-	name = models.CharField(max_length = 200, unique=True, default="")
+	name = models.CharField(max_length = 200, default="")
 	teacher = models.CharField(max_length = 200)
 	exam_id = models.CharField(max_length = 15)
 
-# class UploadSlides(models.Model):
-# 	slide_id = models.CharField(max_length = 15)
-# 	date = models.DateTimeField(auto_now_add=True)
-# 	name = models.CharField(max_length = 100, unique=True, default="")
-# 	teacher = models.CharField(max_length = 200)
-# 	slides = models.File(upload_to='Slides/')
+class UploadSlides(models.Model):
+	slide_id = models.CharField(max_length = 15)
+	date = models.DateTimeField(auto_now_add=True)
+	name = models.CharField(max_length = 100, unique=True, default="")
+	teacher = models.CharField(max_length = 200)
+	slides = models.FileField(upload_to='Slides/New folder')

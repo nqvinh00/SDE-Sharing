@@ -3,6 +3,7 @@
 Đề thi
 {% endblock title %}
 {% block main %}
+{% load static %}
 <div class="row">
     <div class="col-md-3">
         <h4 class="d-flex justify-content-between align-items-center mb-3">
@@ -52,7 +53,8 @@
                     <td>{{ exam.name }}</td>
                     <td>{{ exam.teacher }}</td>
                     <td><a href="/exams/{{exam.id}}/">Link</td>
-                    <td>Thêm sau</td>
+                    <td><a href="/exams/download/{{exam.id}}" download class="btn btn-primary flex-last" type="submit"><i class="fas fa-download"></i>Downlaod</a>
+          </div></td>
                 </tr>
                 {% endfor %}
                 {% endif %}
