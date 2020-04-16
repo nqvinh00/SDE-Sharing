@@ -6,6 +6,7 @@ from .filters import SlidesFilter, ExamsFilter, DocumentsFilter
 from .forms import DocumentForm, ExamForm, SlidesForm
 from .documents import updateDocuments
 from .exams import updateExams
+from .slides import updateSlides, getDuplicate
 import os, mimetypes
 
 def base(request):
@@ -73,12 +74,12 @@ def slide_detail(request, id):
 	directory = slide.source
 	details = []
 	for (path, dirnames, filenames) in os.walk(directory):
-
 		for i in filenames:
-			list_ = []
-			list_.append(path + "/" + i)
-			list_.append(i[0:len(i) - 4])
-			details.append(tuple(list_))
+			if i not in getDuplicate():
+				list_ = []
+				list_.append(path + "/" + i)
+				list_.append(i[0:len(i) - 4])
+				details.append(tuple(list_))
 	return render(request, 'post/slide_detail.html', {'slides':details})
 
 def slide_upload(request):
@@ -86,15 +87,40 @@ def slide_upload(request):
 		form = SlidesForm(request.POST, request.FILES)
 		files = request.FILES.getlist('slides')
 		if form.is_valid():
+			os.makedirs("D:/Python/Project1/Source/Slides/New folder")
 			for file in files:
-				
+				handle_uploaded_file(file)
+			form.save()
+			slide_auto_update()
+			updateSlides()
 			return redirect('home')
+		print(form.fields.slides)
 	else:
 		form = SlidesForm()
 	return render(request, 'post/upload_slide.html', {'form': form})
 
+def handle_uploaded_file(file):
+	with open('D:/Python/Project1/Source/Slides/New folder/' + file.name, 'wb') as destination:
+		for chunk in file.chunks():
+			destination.write(chunk)
 
+def slide_auto_update():
+	query = [UploadSlides.objects.all()]
+	lastest = query[0][len(query[0]) - 1]
+	path = r"D:/Python/Project1/Source/Slides/New folder"
+	path_ = r"D:/Python/Project1/Source/Slides/" + lastest.slide_id + ' - ' + lastest.name + ' - ' + lastest.teacher
+	os.rename(path, path_)
 
+def slide_download():
+	try:
+		document = Documents.objects.get(id=id)
+		file = open(document.source, 'rb')
+		mimetype, i = mimetypes.guess_type(document.source)
+		response = HttpResponse(file, content_type=mimetype)
+		response['Content-Disposition'] = "attachment; filename = %s" % document.source
+		return response
+	except Documents.DoesNotExist:
+		raise Http404("File does not exist")
 def documents(request):
 	query = Documents.objects.all()
 	exams_filter = DocumentsFilter(request.GET, queryset=query)
