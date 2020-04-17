@@ -7,7 +7,7 @@ from .forms import DocumentForm, ExamForm, SlidesForm
 from .documents import updateDocuments
 from .exams import updateExams
 from .slides import updateSlides, getDuplicate
-import os, mimetypes
+import os, mimetypes, shutil
 
 def base(request):
 	return render(request, 'post/base.html')
@@ -75,11 +75,10 @@ def slide_detail(request, id):
 	details = []
 	for (path, dirnames, filenames) in os.walk(directory):
 		for i in filenames:
-			if i not in getDuplicate():
-				list_ = []
-				list_.append(path + "/" + i)
-				list_.append(i[0:len(i) - 4])
-				details.append(tuple(list_))
+			list_ = []
+			list_.append(path + "/" + i)
+			list_.append(i[0:len(i) - 4])
+			details.append(tuple(list_))
 	return render(request, 'post/slide_detail.html', {'slides':details})
 
 def slide_upload(request):
@@ -110,14 +109,17 @@ def slide_auto_update():
 	path = r"D:/Python/Project1/Source/Slides/New folder"
 	path_ = r"D:/Python/Project1/Source/Slides/" + lastest.slide_id + ' - ' + lastest.name + ' - ' + lastest.teacher
 	os.rename(path, path_)
+	os.remove(path_ + getDuplicate())
 
-def slide_download():
+def slide_download(request, id):
 	try:
-		document = Documents.objects.get(id=id)
-		file = open(document.source, 'rb')
-		mimetype, i = mimetypes.guess_type(document.source)
-		response = HttpResponse(file, content_type=mimetype)
-		response['Content-Disposition'] = "attachment; filename = %s" % document.source
+		slide = Slides.objects.get(id=id)
+		file_name = slide.slide_id + ' - ' + slide.name + ' - ' + slide.teacher
+		path = 'D:/Python/Project1/Source/Slides/'
+		shutil.make_archive(path + file_name, 'zip', slide.source)
+		file = open(path + file_name + '.zip', 'rb')
+		response = HttpResponse(file, content_type='application.zip')
+		response['Content-Disposition'] = "attachment; filename = %s" % file_name
 		return response
 	except Documents.DoesNotExist:
 		raise Http404("File does not exist")

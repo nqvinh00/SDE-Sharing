@@ -18,4 +18,5 @@ urlpatterns = [
 	path('slides/', views.slides, name = 'slides'),
 	path('slides/<int:id>/', views.slide_detail),
 	path('upload_slide/', views.slide_upload, name = 'upload_slide'),
+	path('slides/download/<int:id>/', views.slide_download),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

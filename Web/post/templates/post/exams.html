@@ -53,7 +53,7 @@
                     <td>{{ exam.name }}</td>
                     <td>{{ exam.teacher }}</td>
                     <td><a href="/exams/{{exam.id}}/">Link</td>
-                    <td><a href="/exams/download/{{exam.id}}" download class="btn btn-primary flex-last" type="submit"><i class="fas fa-download"></i>Downlaod</a>
+                    <td><a href="/exams/download/{{exam.id}}" download="{{exam.exam_id}} - {{exam.name}} - {{exam.teacher}}" class="btn btn-primary flex-last" type="submit"><i class="fas fa-download"></i>Download</a>
           </div></td>
                 </tr>
                 {% endfor %}
