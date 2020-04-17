@@ -16,30 +16,32 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `post_exams`
+-- Table structure for table `post_uploadexams`
 --
 
-DROP TABLE IF EXISTS `post_exams`;
+DROP TABLE IF EXISTS `post_uploadexams`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `post_exams` (
+CREATE TABLE `post_uploadexams` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `exam_id` varchar(15) NOT NULL,
-  `name` varchar(100) NOT NULL,
+  `exam` varchar(100) NOT NULL,
+  `date` datetime(6) NOT NULL,
+  `name` varchar(200) NOT NULL,
   `teacher` varchar(200) NOT NULL,
-  `source` varchar(200) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
+  `exam_id` varchar(15) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `post_uploadexams_exam_3a49cb18_uniq` (`exam`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `post_exams`
+-- Dumping data for table `post_uploadexams`
 --
 
-LOCK TABLES `post_exams` WRITE;
-/*!40000 ALTER TABLE `post_exams` DISABLE KEYS */;
-INSERT INTO `post_exams` VALUES (1,'ELT2030 ',' Tín hiệu hệ thống ',' Nguyễn Quốc Tuấn','D:/Python/Project1/Source/Examination/ELT2030 - Tín hiệu hệ thống - Nguyễn Quốc Tuấn.pdf'),(2,'test ',' test ',' test','D:/Python/Project1/Source/Examination/test - test - test.txt'),(3,'test ',' test ',' test1','D:/Python/Project1/Source/Examination/test - test - test1.txt'),(7,'ELT2040','Điện tử tương tự ',' Bùi Thanh Tùng','D:/Python/Project1/Source/Examination/ELT2040-Điện tử tương tự - Bùi Thanh Tùng.pdf');
-/*!40000 ALTER TABLE `post_exams` ENABLE KEYS */;
+LOCK TABLES `post_uploadexams` WRITE;
+/*!40000 ALTER TABLE `post_uploadexams` DISABLE KEYS */;
+INSERT INTO `post_uploadexams` VALUES (4,'Examination/NguyenQuangVinh_18021429.pdf','2020-04-13 16:06:33.180775','Điện tử tương tự','Bùi Thanh Tùng','ELT2040');
+/*!40000 ALTER TABLE `post_uploadexams` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 

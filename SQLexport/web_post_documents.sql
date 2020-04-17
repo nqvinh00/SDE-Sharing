@@ -27,7 +27,7 @@ CREATE TABLE `post_documents` (
   `name` varchar(200) NOT NULL,
   `source` varchar(200) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -36,6 +36,7 @@ CREATE TABLE `post_documents` (
 
 LOCK TABLES `post_documents` WRITE;
 /*!40000 ALTER TABLE `post_documents` DISABLE KEYS */;
+INSERT INTO `post_documents` VALUES (1,'test','D:/Python/Project1/Source/Documents/test.txt'),(4,'Điện tử tương tự','D:/Python/Project1/Source/Documents/Điện tử tương tự.txt');
 /*!40000 ALTER TABLE `post_documents` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -48,4 +49,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-03-27 20:01:01
+-- Dump completed on 2020-04-17 20:44:52

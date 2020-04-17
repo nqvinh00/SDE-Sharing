@@ -29,7 +29,7 @@ CREATE TABLE `post_slides` (
   `teacher` varchar(200) NOT NULL,
   `source` varchar(200) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -38,7 +38,7 @@ CREATE TABLE `post_slides` (
 
 LOCK TABLES `post_slides` WRITE;
 /*!40000 ALTER TABLE `post_slides` DISABLE KEYS */;
-INSERT INTO `post_slides` VALUES (1,'ELT2040 ',' Điện tử tương tự ',' Bùi Thanh Tùng','D:\\Python\\Project1\\Source\\Slides\\ELT2040 - Điện tử tương tự - Bùi Thanh Tùng'),(2,'INT2206 ',' Nguyên lý hệ điều hành ',' Lê Đức Trọng','D:\\Python\\Project1\\Source\\Slides\\INT2206 - Nguyên lý hệ điều hành - Lê Đức Trọng');
+INSERT INTO `post_slides` VALUES (11,'INT2206 ',' Nguyên lý hệ điều hành ',' Lê Đức Trọng','D:/Python/Project1/Source/Slides\\INT2206 - Nguyên lý hệ điều hành - Lê Đức Trọng'),(17,'ELT2030 ',' Tín hiệu hệ thống ',' Nguyễn Quốc Tuấn','D:/Python/Project1/Source/Slides\\ELT2030 - Tín hiệu hệ thống - Nguyễn Quốc Tuấn');
 /*!40000 ALTER TABLE `post_slides` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -51,4 +51,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-03-27 20:01:01
+-- Dump completed on 2020-04-17 20:44:53
