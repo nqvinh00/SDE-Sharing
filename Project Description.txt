@@ -1,0 +1,46 @@
+Chức năng chính của sản phẩm là lưu trữ, quản lí tài liệu của người dùng theo từng loại, từng phần.
+ Giúp người dùng có thể tìm kiếm dễ dàng tài liệu, thêm sửa xóa các tài liệu của mình một cách nhanh gọn.
+
+Về tổng quan,  có các mục chính : SLIDE, EXAM, TEXTBOOK
+Ngoài ra, sẽ có mục cho người dùng UPLOAD tài liệu của mình lên “kho chứa” database. 
+Và có một số chức năng như DOWNLOAD tài liệu, SEARCH tài liệu.
+1.	SLIDE
+Trong mục SLIDE, chức năng chính là giúp người dùng tìm kiếm slide, xem và tải về máy.
+ Sẽ có 3 mục, là 3 cột trong một bảng của cơ sở dữ liệu, là nơi người dùng sẽ điền thông tin của slide mình cần.
+ 4 mục đó là : Mã môn, Tên môn, Giảng Viên. 
+Sau khi đã điền các thông tin, ấn nút BROWSER để bắt đầu duyệt database, đưa ra kết quả.
+ Kết quả sẽ hiện ở phần dưới. Hiện dưới dạng là  thông tin nào được tìm kiếm sẽ hiện nổi bật hơn các thông tin còn lại của kết quả. 
+Ví dụ:  tìm kiếm slide “Cơ Sở Dữ Liệu”, thì kết quả sẽ hiện dạng:
+	“CƠ SỞ DỮ LIỆU
+	1902II INT 2207_7
+PGS TS Nguyễn Thanh Tùng”
+	
+Hoặc người dùng chỉ tìm kiếm : “Nguyễn Thanh Tùng” thì kết quả sẽ là:
+	“PGS TS NGUYỄN THANH TÙNG
+	1902II INT 2207_7
+Cơ Sở Dữ Liệu”
+	
+Trong trường hợp có nhiều hơn 1 thông tin đã điền thì sẽ ưu tiên nổi bật theo thứ tự : Mã môn, Tên môn, Giảng viên.
+Vì đang nằm trong mục SLIDE nên khi click chuột vào mỗi kết quả tìm kiếm ở trên, sẽ cho ra tất cả các file PDF, WORD. 
+Và ứng với mỗi file đó, người dùng có thể tải về máy, hoặc xem trực tiếp.. 
+Trong trường hợp không có kết quả nào phù hợp thì kết quả trả về dòng chữ : “Không tìm thấy kết quả nào phù hợp”.
+
+2.	EXAM
+Tương tự như phần SLIDE, nhưng ở mục này sẽ chỉ có 3 thông tin cần điền: Mã môn, Tên môn, Năm học ( 3 cột trong bảng).
+ Phần kết quả hiển thị vẫn tương tự như ở mục SLIDE, vẫn ưu tiên nổi bật thông tin đã tìm kiếm. Phần tải và xem file cũng tương tự.
+3.	TEXTBOOK 
+Ở mục này, sẽ có  thông tin cần điền: Mã sách , Tên sách, Tác Giả. Thứ tự ưu tiên nổi bật của kết quả cũng theo thứ tự như trên.
+4.	UPLAOD
+Ở mục này sẽ có thay đổi. Người dùng phải điền “ĐẦY ĐỦ” thông tin của tài liệu mình chuẩn bị upload lên. 
+Và trước khi điền thì người dùng phải chọn loại tài liệu mình chuẩn bị upload : Slide, Exam, Textbook.
+ Đối với mỗi loại tài liệu sẽ có các mục điền thông tin tương ứng, là mục thông tin của từng loại. 
+Ví dụ, chọn loại file là SLIDE, thì người dùng phải điền đầy đủ  mục thông tin: Mã môn, Tên môn, Giảng viên.
+ Người dùng có thể kéo thả file. SAVE để lưu, hoặc CANCEL để thực hiện lại thao tác khác.
+5.	SEARCH
+Sẽ có một thanh tìm kiếm nhanh cho người dùng. Kết quả sẽ hiện ưu tiên nổi bật thông tin mà người dùng đã nhập vào ô tìm kiếm. 
+Kết quả trả về phải hiện đầy đủ thông tin: Kết quả thuộc mục nào trong 3 mục trên, loại file, tên…
+6.	SỬA, XÓA
+Cập nhật thêm các chức năng giúp người dùng có thể sửa thông tin của dữ liệu, xóa dữ liệu…
+
+
+
