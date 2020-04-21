@@ -1,0 +1,15 @@
+Dữ liệu sẽ cần 3 bảng chính : Slide, Exam, Document
+1.	Slide
+ID		Slide_id	Name	Teacher	source
+(primary key)				
+
+Source có thể là  pdf hoặc là  powerpoint, là slide bài giảng của môn học.
+2.	Exam
+ID		Exam_id	 	 Name		Teacher		Source
+(primary key)				
+
+	Source có thể là link file word hoặc pdf, là đề thi của các môn.
+3.	Document
+ID		Name		Arthor		Source
+(Primary key)			
+
