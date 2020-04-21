@@ -8,8 +8,15 @@ def updateSlides():
 		passwd = "root",
 		database = "web"
 		)
+	# db = mysql.connector.connect(
+	# 	host = "nqvinh00.mysql.pythonanywhere-services.com",
+	# 	user = "nqvinh00",
+	# 	passwd = "vinh1412",
+	# 	database = "nqvinh00$web"
+	# 	)
 	mycursor = db.cursor(buffered=True)
 	directory = "D:/Python/Project1/Source/Slides"
+	# directory = "/home/nqvinh00/Project1/Source/Slides"
 	y = [x[0] for x in os.walk(directory) if x[0] != directory]
 	for x in y:
 		slide_id, name, teacher = x[len(directory) + 1: len(x)].split('-')

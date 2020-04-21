@@ -8,8 +8,15 @@ def updateExams():
 		passwd = "root",
 		database = "web"
 		)
+	# db = mysql.connector.connect(
+	# 	host = "nqvinh00.mysql.pythonanywhere-services.com",
+	# 	user = "nqvinh00",
+	# 	passwd = "vinh1412",
+	# 	database = "nqvinh00$web"
+	# 	)
 	mycursor = db.cursor(buffered=True)
 	directory = "D:/Python/Project1/Source/Examination"
+	# directory = "/home/nqvinh00/Project1/Source/Examination"
 	for (path, dirnames, filenames) in os.walk(directory):
 		for i in filenames:
 			print(i)
