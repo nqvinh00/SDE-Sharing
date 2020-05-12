@@ -11,17 +11,19 @@
         <link rel="stylesheet" href="{% static 'css/ionicons.min.css' %}">
         <link rel="stylesheet" href="{% static 'css/flaticon.css' %}">
         <link rel="stylesheet" href="{% static 'css/style.css' %}">
+        <link rel="stylesheet" href="{% static 'css/css/jibun.css' %}">
+        <link rel="stylesheet" href="{% static 'css/icomoon.css' %}">
   </head>
   <body>
 
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark ftco-navbar-light" id="ftco-navbar">
             <div class="container d-flex align-items-center px-4">
-                <form action="#" class="searchform order-lg-last">
+                <!-- <form action="#" class="searchform order-lg-last">
                     <div class="form-group d-flex">
                         <input type="text" class="form-control pl-3" placeholder="Search">
                         <button type="submit" placeholder="" class="form-control search"><span class="ion-ios-search"></span></button>
                     </div>
-                </form>
+                </form> -->
                 <div class="collapse navbar-collapse" id="ftco-nav">
                     <ul class="navbar-nav mr-auto">
                         <li class="nav-item active"><a href="{% url 'index' %}" class="nav-link pl-0">Home</a></li>
@@ -40,20 +42,61 @@
         </nav>
     <!-- END nav -->
     
-    <section class="hero-wrap hero-wrap-2" style="background-image: url({% static 'images/Bg3.jpg' %});">
+    <section class="hero-wrap hero-wrap-2" style="background-image: url({% static 'images/Bg2.jpg' %});">
       <div class="overlay"></div>
       <div class="container">
         <div class="row no-gutters slider-text align-items-center justify-content-center">
           <div class="col-md-9 ftco-animate text-center">
-            <h1 class="mb-2 bread">Textbook</h1>
-            <p class="breadcrumbs"><span class="mr-2"><a href="index.html">Home <i class="ion-ios-arrow-forward"></i></a></span> 
-                <span>Textbook <i class="ion-ios-arrow-forward"></i></span></p>
+            <h1 class="mb-2 bread">Documents</h1>
+            <p class="breadcrumbs"><span class="mr-2"><a href="{% url 'index' %}">Home <i class="ion-ios-arrow-forward"></i></a></span> 
+                <span>Documents <i class="ion-ios-arrow-forward"></i></span></p>
           </div>
         </div>
       </div>
     </section>
-    
-    <section class="ftco-section">
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3">
+                <h4 class="d-flex justify-content-between align-items-center mb-3">
+                    <span class="text-muted">Lọc tìm kiếm</span>
+                </h4>
+                {% load widget_tweaks %}
+                <form method="get" class="border p-3">
+                    <div class="mb-3">
+                        <label for="">Tên sách</label>
+                        {% render_field form.name class="form-control" %}
+                    </div>
+                    <hr class="mb-4">
+                    <button class="btn btn-primary btn-lg btn-block" type="submit">Tìm kiếm</button>
+                </form>
+            </div>
+            <div class="col-md-9">
+                <h4 class="d-flex justify-content-between align-items-center mb-3">
+                <span class="text-muted">Danh sách tài liệu</span>
+                <span class="badge badge-secondary badge-pill">{{ documents.count }}</span>
+                </h4>
+                <table class="table">
+                    <tr>
+                        <th style="width:5%;">STT</th>
+                        <th style="width:75%;">Tên sách</th>
+                        <th></th>
+                    </tr>
+                    {% if documents %}
+                        {% for document in documents %}
+                            <tr>
+                                <td>{{ forloop.counter }}</td>
+                                <td>{{ document.name }}</td>
+                                <td><a href="/documents/download/{{document.id}}" download="{{document.name}}" class="btn btn-primary flex-last" type="submit"><i class="fas fa-download"></i>Download</a></td>
+                            </tr>
+                        {% endfor %}
+                    {% endif %}
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- <section class="ftco-section">
         <div class="container-fluid px-4">
             <div class="row">
                 {% if documents %}
@@ -67,7 +110,7 @@
                             </div>
                         </div>
                     {% endfor %}
-                {% endif %}
+                {% endif %} -->
                 <!-- <div class="col-md-3 course ftco-animate">
                     <div class="img" style="background-image: url({% static 'images/course-1.jpg' %});"></div>
                     <div class="text pt-4">

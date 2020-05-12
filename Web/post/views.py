@@ -72,6 +72,18 @@ def exam_upload_(request):
 		form = ExamForm()
 	return render(request, 'post/exam_upload.html', {'form': form})
 
+def document_upload_(request):
+	if request.method == 'POST':
+		form = DocumentForm(request.POST, request.FILES)
+		if form.is_valid():
+			form.save()
+			document_auto_update()
+			updateDocuments()
+			return redirect('home')
+	else:
+		form = DocumentForm()
+	return render(request, 'post/document_upload.html', {'form': form})
+
 def about(request):
 	return render(request, 'post/about.html')
 
@@ -124,18 +136,6 @@ def exam_download(request, id):
 		return response
 	except Exams.DoesNotExist:
 		raise Http404("File does not exist")
-
-def document_upload_(request):
-	if request.method == 'POST':
-		form = DocumentForm(request.POST, request.FILES)
-		if form.is_valid():
-			form.save()
-			document_auto_update()
-			updateDocuments()
-			return redirect('home')
-	else:
-		form = DocumentForm()
-	return render(request, 'post/document_upload.html', {'form': form})
 
 def slides(request):
 	query = Slides.objects.all()

@@ -1,0 +1,37 @@
+table, th, td{
+    border-top:1px solid #ccc;
+    border-bottom:1px solid #ccc;
+    border-left: 0px;
+    border-right: 0px;
+    text-align: center;
+    font-size: 20px;
+}
+button{
+    border-radius: 4px;
+    background-color: LightSalmon;
+    margin-top: 3px;
+    margin-bottom: 3px;
+}
+
+table{
+    margin-top: 30px;
+    border-collapse:collapse;
+    margin: 0 auto;
+}
+table tr:nth-child(odd){
+    background-color:#eee;
+}
+table tr:nth-child(even){
+    background-color:white;
+}
+table tr:nth-child(1){
+    background-color:skyblue;
+}
+tr:hover{
+    background-color:#ddd;
+    cursor:pointer;
+}
+th{
+    text-align: center;
+    font-size: 25px;
+}
